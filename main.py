@@ -63,10 +63,10 @@ def main():
     err_img = abs(np.array(rec_img_rgb, dtype=float) - np.array(orig_img, dtype=float))
     mse = (err_img ** 2).mean()
     psnr = 10 * math.log10((255 ** 2) / mse)
-    ssim = compute_ssim(cv.cvtColor(np.float32(rec_img_rgb), code=cv.COLOR_BGR2GRAY),
-                        cv.cvtColor(np.float32(orig_img), code=cv.COLOR_BGR2GRAY))
+    # ssim = compute_ssim(cv.cvtColor(np.float32(rec_img_rgb), code=cv.COLOR_BGR2GRAY),
+    #                     cv.cvtColor(np.float32(orig_img), code=cv.COLOR_BGR2GRAY), data_range=[0,255])
     print('PSNR: %s dB' % psnr)
-    print('SSIM: %s' % ssim)
+    # print('SSIM: %s' % ssim)
 
     # visualize
     # cv.imshow('Approximation image', rec_img_rgb)
