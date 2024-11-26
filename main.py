@@ -69,9 +69,11 @@ def main():
     print('SSIM: %s' % ssim)
 
     # visualize
-    cv.imshow('Approximation image', rec_img_rgb)
-    while True:
-        cv.waitKey(33)
+    # cv.imshow('Approximation image', rec_img_rgb)
+    # while True:
+    #     cv.waitKey(33)
+
+    cv.imwrite('Rec.img.png', rec_img_rgb)
 
 
 def approximate_mono_image(img, num_coeffs=None, scale_factor=1):
