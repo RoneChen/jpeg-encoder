@@ -39,6 +39,8 @@ Run the script and pass an image as an argument
 
 ```bash
 python3 main.py --input <path_to_image> --coeffs <number_of_coefficients>
+
+# The range of coefficients is from 0 ot 64.
 ```
 
 ### Example 
