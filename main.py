@@ -22,7 +22,7 @@ import numpy as np
 import cv2 as cv
 
 import utils
-
+import numpy as np
 
 def main():
     # parse the command line arguments to attributes of 'args'
@@ -68,7 +68,13 @@ def main():
     print('PSNR: %s dB' % psnr)
     print('SSIM: %s' % ssim)
 
-    cv.imwrite(f'outputs/coef_{args.num_coeffs}_sf_{args.scale_factor}.jpg', rec_img_rgb)
+    # cv.imwrite(f'outputs/coef_{args.num_coeffs}_sf_{args.scale_factor}.jpg', rec_img_rgb)
+
+    rec_img_arr = np.array(rec_img_rgb)
+    _, jpeg_encoded = cv.imencode('.jpg', rec_img_arr)
+    file = open(f'outputs/coef_{args.num_coeffs}_sf_{args.scale_factor}.jpg', 'wb')
+    file.write(jpeg_encoded.tobytes())
+    file.close()
 
 
 def approximate_mono_image(img, num_coeffs=None, scale_factor=1):

@@ -11,16 +11,30 @@ import cv2 as cv
 img = cv.imread('input.jpg', cv.IMREAD_COLOR)
 img = np.float32(img)
 
-img_ycc = cv.cvtColor(img, code=cv.COLOR_BGR2YCrCb)
 
-# get the Y component of the image (luminance)
-img_y = img_ycc[:, :, 0]
-cv.imwrite('block.jpg', img_y)
+def block_seperation(img, block_size=8):
+    img_ycc = cv.cvtColor(img, code=cv.COLOR_BGR2YCrCb)
 
-img_y_blocks = [img_y[j:j + 8, i:i + 8] for (j, i) in itertools.product(range(0, img_y.shape[0], 8), range(0, img_y.shape[1], 8))]
+    # get the Y component of the image (luminance)
+    img_y = img_ycc[:, :, 0]
 
-index = 0
-for block in img_y_blocks:
-    filename = f'block{index}.jpg'
-    cv.imwrite(f'blocks/{filename}.jpg', block)
-    index += 1
+    # Split the image into blocks of the specified size
+    img_y_blocks = [
+        [img_y[j:j + block_size, i:i + block_size] for i in range(0, img_y.shape[1], block_size)]
+        for j in range(0, img_y.shape[0], block_size)
+    ]
+
+    # Save each block as a separate image file
+    for row_idx, row in enumerate(img_y_blocks):
+        for col_idx, block in enumerate(row):
+            # Construct the filename using row and column indices
+            filename = f"blocks/row_{row_idx}_col_{col_idx}.jpg"
+            # Save the block
+            cv.imwrite(filename, block)
+
+    return img_y_blocks
+
+def intra_block_prediction(img_blocks):
+    pred_blocks = img_blocks[1:, 1:]
+    for row_idx, block in enumerate(pred_blocks):
+        
