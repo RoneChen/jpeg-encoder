@@ -65,10 +65,10 @@ def main():
     psnr = 10 * math.log10((255 ** 2) / mse)
     ssim = compute_ssim(cv.cvtColor(np.float32(rec_img_rgb), code=cv.COLOR_BGR2GRAY),
                         cv.cvtColor(np.float32(orig_img), code=cv.COLOR_BGR2GRAY), data_range=255)
-    # print('PSNR: %s dB' % psnr)
+    print('PSNR: %s dB' % psnr)
     print('SSIM: %s' % ssim)
 
-    cv.imwrite(f'outputs/coef_{args.num_coeffs}.jpg', rec_img_rgb)
+    cv.imwrite(f'outputs/coef_{args.num_coeffs}_sf_{args.scale_factor}.jpg', rec_img_rgb)
 
 
 def approximate_mono_image(img, num_coeffs=None, scale_factor=1):

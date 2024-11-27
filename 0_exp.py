@@ -14,8 +14,11 @@ def scale_factor_analysis():
     r'''
     This function is used to analyze the impact of the scale factor on the quality of the reconstructed image.
     '''
-    for scale_factor in [1, 2, 4, 8]:
+    for scale_factor in [1, 2, 4, 8, 16, 32]:
         msg = os.popen(f'python main.py --input input.jpg --scale-factor {scale_factor}')
         output = msg.read()
         print(output, end='')
+
+if __name__ == "__main__":
+    scale_factor_analysis()
         
