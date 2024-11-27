@@ -68,8 +68,7 @@ def main():
     print('PSNR: %s dB' % psnr)
     print('SSIM: %s' % ssim)
 
-    # cv.imwrite(f'outputs/coef_{args.num_coeffs}_sf_{args.scale_factor}.jpg', rec_img_rgb)
-
+    # save the incoded image
     rec_img_arr = np.array(rec_img_rgb)
     _, jpeg_encoded = cv.imencode('.jpg', rec_img_arr)
     file = open(f'outputs/coef_{args.num_coeffs}_sf_{args.scale_factor}.jpg', 'wb')

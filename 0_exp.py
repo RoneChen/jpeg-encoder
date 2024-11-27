@@ -20,5 +20,5 @@ def scale_factor_analysis():
         print(output, end='')
 
 if __name__ == "__main__":
-    scale_factor_analysis()
+    coefficient_analysis()
         
